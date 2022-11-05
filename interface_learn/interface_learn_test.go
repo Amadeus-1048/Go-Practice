@@ -25,3 +25,17 @@ func TestPersonAge(t *testing.T) {
 	deus.grouUp()
 	fmt.Println(deus.howOld()) // 指针类型调用指针类型的方法 传值，即复制了一份指针
 }
+
+func TestAssert(t *testing.T) {
+	var i interface{} = new(Person)
+	s, ok := i.(Person)
+	if ok {
+		fmt.Println(s)
+	} else { // 需要错误处理，否则会panic
+		// 这里类型断言会失败，因为 i 是 *Person 类型（new），而非Person类型
+		fmt.Println("type assert error")
+	}
+
+	i = (*Person)(nil)    // 动态类型为*Person，数据为nil，其类型并不是nil
+	fmt.Println(i == nil) // 与nil做比较的时候，返回为false
+}
